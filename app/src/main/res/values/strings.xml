@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Meds Memory</string>
+    <string name="text_welcome">WELCOME TO MEDS MEMORY</string>
+    <string name="button_add">+</string>
+    <string name="button_menu">•••</string>
 </resources>
