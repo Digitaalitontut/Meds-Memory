@@ -29,7 +29,8 @@
         android:text="@string/button_add"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="toAddMedication" />
 
     <Button
         android:id="@+id/buttonMenu"

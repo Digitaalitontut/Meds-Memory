@@ -3,4 +3,9 @@
     <string name="text_welcome">WELCOME TO MEDS MEMORY</string>
     <string name="button_add">+</string>
     <string name="button_menu">•••</string>
+    <string name="text_add">ADD MEDICATION</string>
+    <string name="edit_medication">Add the name of medication</string>
+    <string name="edit_dose">Add required dose</string>
+    <string name="edit_notes">Personal notes e.g. \"Do not take with milk.\"</string>
+    <string name="button_submit">SUBMIT</string>
 </resources>
