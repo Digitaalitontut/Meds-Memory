@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.medsmemory.R;
+
 public class ReminderPublisher extends BroadcastReceiver {
     public static String NOTIFICATION_EXTRA_KEY = "EXTRA_NOTIFICATION";
     public static String NOTIFICATION_ID_EXTRA_KEY = "EXTRA_NOTIFICATION_ID";
@@ -14,7 +16,7 @@ public class ReminderPublisher extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-
+        Log.d("Last", Integer.toString(R.drawable.ic_stat_report));
         Notification notification = intent.getParcelableExtra(NOTIFICATION_EXTRA_KEY);
         int id = intent.getIntExtra(NOTIFICATION_ID_EXTRA_KEY, 0);
         notificationManager.notify(id,notification);

@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -48,6 +49,7 @@ public class RemindAlarm {
     }
 
     private Notification createNotification() {
+        Log.d("First", Integer.toString(R.drawable.ic_stat_report));
         NotificationCompat.Builder builder = new NotificationCompat.Builder(Application.getAppContext(),CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_report)
                 .setContentTitle("Remember to take your medication!")
