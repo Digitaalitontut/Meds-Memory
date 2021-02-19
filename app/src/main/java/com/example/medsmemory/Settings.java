@@ -1,9 +1,14 @@
 package com.example.medsmemory;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import business.AppSettingsStorage;
 
 public class Settings extends AppCompatActivity {
 
@@ -14,5 +19,15 @@ public class Settings extends AppCompatActivity {
 
         TextView title = findViewById(R.id.toolbar_title);
         title.setText(R.string.text_settings);
+
+        ((Switch)findViewById(R.id.switchTheme)).setChecked(AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DARK_MODE, false));
+
+    }
+
+    public void applySettings(View view) {
+        Switch darkMode = findViewById(R.id.switchTheme);
+
+        AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DARK_MODE, darkMode.isChecked());
+        AppCompatDelegate.setDefaultNightMode(darkMode.isChecked() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 }

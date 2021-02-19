@@ -14,4 +14,5 @@
     <string name="switch_notifications">Notifications</string>
     <string name="switch_theme">Dark mode</string>
     <string name="text_appname">MEDS MEMORY</string>
+    <string name="apply_button">Apply</string>
 </resources>
