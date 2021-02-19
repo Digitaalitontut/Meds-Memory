@@ -10,7 +10,7 @@ import java.util.Set;
 public class AppSettingsStorage {
     private static AppSettingsStorage _instance = null;
 
-    public static enum Setting {
+    public enum Setting {
         DARK_MODE,
         NOTIFICATIONS_ENABLED
     }
