@@ -10,8 +10,9 @@
     <string name="button_submit">SUBMIT</string>
     <string name="text_remind">Remember to take</string>
     <string name="text_check">Check if taken</string>
-    <string name="text_settings">Settings</string>
+    <string name="text_settings">SETTINGS</string>
     <string name="switch_notifications">Notifications</string>
     <string name="switch_theme">Dark mode</string>
     <string name="text_appname">MEDS MEMORY</string>
+    <string name="button_edit">Edit medications</string>
 </resources>
