@@ -49,7 +49,7 @@ public class RemindAlarm {
 
     private Notification createNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(Application.getAppContext(),CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.baseline_report_black_18dp)
                 .setContentTitle("Remember to take your medication!")
                 .setContentText("You need to take 1 pill of something")
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
