@@ -12,13 +12,11 @@
 
     <EditText
         android:id="@+id/editTextMedication"
-        android:layout_width="345dp"
-        android:layout_height="45dp"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/edit_medication"
         android:inputType="textPersonName"
@@ -28,13 +26,11 @@
 
     <EditText
         android:id="@+id/editTextDose"
-        android:layout_width="345dp"
-        android:layout_height="45dp"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/edit_dose"
         android:inputType="textPersonName"
@@ -44,24 +40,30 @@
 
     <TextView
         android:id="@+id/textViewAlarm"
-        android:layout_width="185dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/text_alarm"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDose" />
 
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewAlarm"
+        app:layout_constraintStart_toEndOf="@+id/textViewAlarm" />
+
     <EditText
         android:id="@+id/editMultiLineNotes"
-        android:layout_width="345dp"
+        android:layout_width="409dp"
         android:layout_height="138dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/edit_notes"
@@ -79,6 +81,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:onClick="setAlarm"
         android:text="@string/button_submit"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"

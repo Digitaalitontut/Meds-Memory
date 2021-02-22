@@ -16,5 +16,5 @@
     <string name="text_appname">MEDS MEMORY</string>
     <string name="apply_button">Apply</string>
     <string name="button_edit">Edit medications</string>
-    <string name="text_alarm">Set reminder alarm</string>
+    <string name="text_alarm">Set reminder alarm on</string>
 </resources>
