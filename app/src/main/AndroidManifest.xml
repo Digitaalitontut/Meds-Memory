@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedsMemory">
-        <activity android:name=".EditMedication"></activity>
+        <activity android:name=".EditMedication" />
         <activity android:name=".Settings" />
         <activity android:name=".Reminder" />
         <activity android:name=".AddMedication" />
@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver android:name="business.ReminderPublisher" />
     </application>
 

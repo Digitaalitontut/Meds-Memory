@@ -3,6 +3,7 @@ package com.example.medsmemory;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class AddMedication extends AppCompatActivity {
         title.setText(R.string.text_add);
     }
 
+    // Creates a time picker when clock is clicked. Picked time then will be sent to TextView.
     public void setAlarm(View view ) {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
