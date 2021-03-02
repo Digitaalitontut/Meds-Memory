@@ -33,7 +33,7 @@ public class AddMedication extends AppCompatActivity {
         title.setText(R.string.text_add);
     }
 
-    // Creates a time picker when clock is clicked. Picked time then will be sent to TextView.
+    // Creates a time picker when clock icon is clicked. Picked time then will be sent to TextView.
     public void setAlarm(View view) {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -53,6 +53,7 @@ public class AddMedication extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    // Creates a date picker when calendar icon is clicked. Picked date will be sent to editText next to it.
     public void setDate(View view) {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -70,7 +71,7 @@ public class AddMedication extends AppCompatActivity {
                 until.setText(set);
             }
 
-        }, day, month, year);
+        }, year, month, day);
         datePickerDialog.show();
     }
 }

@@ -15,7 +15,8 @@
     <string name="switch_theme">Dark mode</string>
     <string name="text_appname">MEDS MEMORY</string>
     <string name="apply_button">Apply</string>
-    <string name="button_edit">Edit medications</string>
+    <string name="button_edit">EDIT MEDICATIONS</string>
     <string name="text_alarm">Click to start alarm at</string>
     <string name="text_set">SETTING REMINDER</string>
+    <string name="button_snooze">SNOOZE\n10 mins</string>
 </resources>
