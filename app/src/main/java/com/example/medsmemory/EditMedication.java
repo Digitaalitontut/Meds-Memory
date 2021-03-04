@@ -15,6 +15,7 @@ public class EditMedication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_medication);
 
+
         TextView title = findViewById(R.id.toolbar_title);
         title.setText(R.string.button_edit);
     }

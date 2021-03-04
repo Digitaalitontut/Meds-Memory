@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.medsmemory.Application;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import business.data.MedicationReaderContract;
 import business.data.MedicationReaderDbHelper;
@@ -25,19 +26,20 @@ public class MedicationStorage {
         return _instance;
     }
 
-    public long create(Medication med) {
+    public Medication insert(Medication med) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        return db.insert(MedicationReaderContract.MedicationEntry.TABLE_NAME,null, medicationToContentValues(med));
+        med.setId(db.insert(MedicationReaderContract.MedicationEntry.TABLE_NAME,null, medicationToContentValues(med)));
+        return med;
     }
 
     private ContentValues medicationToContentValues(Medication med) {
         ContentValues values = new ContentValues();
-        //values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME, med.getName()); TODO
-        //values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_START, med.getName()); TODO
-        //values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_END, med.getName()); TODO
-        //values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_INTERVAL, med.getName()); TODO
-        //values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NOTIFICATION_SETTING, med.getName()); TODO
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME, med.getName());
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_START, med.getStart().getTimeInMillis());
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_END, med.getEnd().getTimeInMillis());
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_INTERVAL, med.getIntervalInMilliseconds());
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_DOSE, med.getDose());
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NOTES, med.getNotes());
         return values;
     }
 
@@ -46,16 +48,40 @@ public class MedicationStorage {
         return db.update(
                 MedicationReaderContract.MedicationEntry.TABLE_NAME,
                 medicationToContentValues(med),
-                MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME + "=?",
-                new String[]{med.toString()} // TODO: FIX?
+                MedicationReaderContract.MedicationEntry.COLUMN_NAME_ID + "=?",
+                new String[]{Long.toString(med.getId())}
         );
     }
 
 
     public int delete(Medication med) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        return db.delete(MedicationReaderContract.MedicationEntry.TABLE_NAME, MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME+"=?", new String[]{med.toString()}); // TODO: fix where clause
+        return db.delete(MedicationReaderContract.MedicationEntry.TABLE_NAME, MedicationReaderContract.MedicationEntry.COLUMN_NAME_ID+"=?", new String[]{Long.toString(med.getId())});
     }
+
+    public Medication get(long id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + MedicationReaderContract.MedicationEntry.TABLE_NAME + " WHERE " + MedicationReaderContract.MedicationEntry.COLUMN_NAME_ID + " = " + Long.toString(id), null);
+        if(c != null) c.moveToFirst();
+        return medicationFromCursor(c);
+     }
+
+     private Medication medicationFromCursor(Cursor cursor) {
+         Calendar start = Calendar.getInstance();
+         start.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_START)));
+         Calendar end = Calendar.getInstance();
+         end.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_END)));
+         Medication med = new Medication(
+                 cursor.getString(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME)),
+                 start,
+                 end,
+                 cursor.getInt(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_INTERVAL)),
+                 cursor.getFloat(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_DOSE)),
+                 cursor.getString(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NOTES))
+         );
+         med.setId(cursor.getInt(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_ID)));
+         return med;
+     }
 
     public ArrayList<Medication> getAll() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -71,12 +97,7 @@ public class MedicationStorage {
         ArrayList<Medication> meds = new ArrayList<>();
 
         while(cursor.moveToNext()) {
-            // TODO: finish mapping when Medication class is ready
-           /* meds.add(new Medication(
-                    cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME)
-            ))
-            */
-
+            meds.add(medicationFromCursor(cursor));
         }
         cursor.close();
 

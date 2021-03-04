@@ -11,9 +11,7 @@
         android:layout_width="282dp"
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:gravity="fill_horizontal"
         android:text="@string/text_remind"
         android:textSize="36sp"
@@ -84,9 +82,9 @@
         android:layout_height="220dp"
         android:layout_marginBottom="50dp"
         android:checked="false"
+        android:clickable="true"
         android:scaleX="10"
         android:scaleY="10"
-        android:text="HugeCheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -107,4 +105,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
