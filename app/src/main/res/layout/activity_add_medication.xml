@@ -12,13 +12,11 @@
 
     <EditText
         android:id="@+id/editTextMedication"
-        android:layout_width="345dp"
-        android:layout_height="45dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/edit_medication"
         android:inputType="textPersonName"
@@ -28,56 +26,151 @@
 
     <EditText
         android:id="@+id/editTextDose"
-        android:layout_width="345dp"
-        android:layout_height="45dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/edit_dose"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextMedication" />
 
     <TextView
         android:id="@+id/textViewAlarm"
-        android:layout_width="185dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:text="@string/text_alarm"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDose" />
 
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewAlarm"
+        app:layout_constraintStart_toEndOf="@+id/textViewAlarm" />
+
+    <Button
+        android:id="@+id/buttonAlarm"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_baseline_access_alarm_24"
+        android:onClick="setAlarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAlarm" />
+
+    <TextView
+        android:id="@+id/textViewFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="How many times a day? "
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonAlarm"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAlarm" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewFrequency"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFrequency" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Until"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRecurring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Recurring every:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editMultiLineNotes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAlarm"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/editMultiLineNotes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toEndOf="@+id/textViewRecurring"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAlarm"
+        app:layout_constraintVertical_bias="0.3">
+
+        <RadioButton
+            android:id="@+id/radioDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day" />
+
+        <RadioButton
+            android:id="@+id/radioWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Week" />
+
+        <RadioButton
+            android:id="@+id/radioMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month" />
+
+    </RadioGroup>
+
     <EditText
         android:id="@+id/editMultiLineNotes"
-        android:layout_width="345dp"
-        android:layout_height="138dp"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/edit_notes"
         android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAlarm"
+        app:layout_constraintVertical_bias="0.9" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSubmit"
         android:layout_width="320dp"
-        android:layout_height="101dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/button_submit"
         android:textSize="50sp"
@@ -85,11 +178,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/ic_baseline_today_24"
+        android:onClick="setDate"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDate"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

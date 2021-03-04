@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedsMemory">
-        <activity android:name=".EditMedication"></activity>
+        <activity android:name=".EditMedication" />
         <activity android:name=".Settings" />
         <activity android:name=".Reminder" android:launchMode="singleTop" android:turnScreenOn="true" android:showOnLockScreen="true"/>
         <activity android:name=".AddMedication" />
