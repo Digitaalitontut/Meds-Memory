@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <receiver android:name="business.ReminderReceiver" />
+        <receiver android:name="business.DayRemindReceiver" />
         <service android:name="business.NotificationService" />
     </application>
 

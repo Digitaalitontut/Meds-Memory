@@ -10,19 +10,14 @@ public class Medication {
     private String name;
     private Calendar start;
     private Calendar end;
-    private long intervalInMilliseconds;
+
+    private int takeDayInterval; // take every x days
+    private int takeInterval; // take x amount of times in a day
 
     private float dose;
     private String notes;
 
-    public Medication(String name, Calendar start, Calendar end, long intervalInMilliseconds, float dose, String notes) {
-        this.name = name;
-        this.start = start;
-        this.end = end;
-        this.intervalInMilliseconds = intervalInMilliseconds;
-        this.dose = dose;
-        this.notes = notes;
-    }
+    public Medication() {}
 
     public long getId() {
         return id;
@@ -56,14 +51,6 @@ public class Medication {
         this.end = end;
     }
 
-    public long getIntervalInMilliseconds() {
-        return intervalInMilliseconds;
-    }
-
-    public void setIntervalInMilliseconds(long intervalInMilliseconds) {
-        this.intervalInMilliseconds = intervalInMilliseconds;
-    }
-
     public float getDose() {
         return dose;
     }
@@ -84,5 +71,21 @@ public class Medication {
     @Override
     public String toString() {
         return String.format("id: %s, name: %s", id, name);
+    }
+
+    public int getTakeDayInterval() {
+        return takeDayInterval;
+    }
+
+    public void setTakeDayInterval(int takeDayInterval) {
+        this.takeDayInterval = takeDayInterval;
+    }
+
+    public int getTakeInterval() {
+        return takeInterval;
+    }
+
+    public void setTakeInterval(int takeInterval) {
+        this.takeInterval = takeInterval;
     }
 }

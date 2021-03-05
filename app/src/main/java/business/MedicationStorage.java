@@ -2,6 +2,7 @@ package business;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.medsmemory.Application;
@@ -37,7 +38,8 @@ public class MedicationStorage {
         values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME, med.getName());
         values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_START, med.getStart().getTimeInMillis());
         values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_END, med.getEnd().getTimeInMillis());
-        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_INTERVAL, med.getIntervalInMilliseconds());
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_TAKEDAYINTERVAL, med.getTakeDayInterval());
+        values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_TAKEINTERVAL, med.getTakeInterval());
         values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_DOSE, med.getDose());
         values.put(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NOTES, med.getNotes());
         return values;
@@ -71,16 +73,38 @@ public class MedicationStorage {
          start.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_START)));
          Calendar end = Calendar.getInstance();
          end.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_END)));
-         Medication med = new Medication(
-                 cursor.getString(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME)),
-                 start,
-                 end,
-                 cursor.getInt(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_INTERVAL)),
-                 cursor.getFloat(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_DOSE)),
-                 cursor.getString(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NOTES))
-         );
+         Medication med = new Medication();
          med.setId(cursor.getInt(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_ID)));
+         med.setName(cursor.getString(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NAME)));
+         med.setStart(start);
+         med.setEnd(end);
+         med.setTakeDayInterval(cursor.getInt(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_TAKEDAYINTERVAL)));
+         med.setTakeInterval(cursor.getInt(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_TAKEINTERVAL)));
+         med.setDose(cursor.getInt(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_DOSE)));
+         med.setNotes(cursor.getString(cursor.getColumnIndex(MedicationReaderContract.MedicationEntry.COLUMN_NAME_NOTES)));
          return med;
+     }
+
+     public void insertLog(Medication med, Calendar takenAt) {
+         SQLiteDatabase db = dbHelper.getWritableDatabase();
+         ContentValues values = new ContentValues();
+         values.put(MedicationReaderContract.MedicationLog.COLUMN_NAME_MED_ID, med.getId());
+         values.put(MedicationReaderContract.MedicationLog.COLUMN_NAME_TAKEN_AT, takenAt.getTimeInMillis());
+         db.insert(MedicationReaderContract.MedicationLog.TABLE_NAME,null, values);
+     }
+
+     public int deleteLog(Medication med) {
+         SQLiteDatabase db = dbHelper.getWritableDatabase();
+         return db.delete(MedicationReaderContract.MedicationLog.TABLE_NAME, MedicationReaderContract.MedicationLog.COLUMN_NAME_MED_ID+"=?", new String[]{Long.toString(med.getId())});
+     }
+
+     public long countLog(Medication med, Calendar start, Calendar end) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        return DatabaseUtils.queryNumEntries(db, MedicationReaderContract.MedicationLog.TABLE_NAME, MedicationReaderContract.MedicationLog.COLUMN_NAME_MED_ID + " = ? AND " +
+                MedicationReaderContract.MedicationLog.COLUMN_NAME_TAKEN_AT + " > ? AND " +
+                MedicationReaderContract.MedicationLog.COLUMN_NAME_TAKEN_AT + " < ?",
+                new String[]{Long.toString(med.getId()), Long.toString(med.getStart().getTimeInMillis()), Long.toString(med.getEnd().getTimeInMillis())}
+        );
      }
 
     public ArrayList<Medication> getAll() {

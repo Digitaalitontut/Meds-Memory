@@ -19,6 +19,7 @@ import com.example.medsmemory.R;
 import com.example.medsmemory.Reminder;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 
 public class RemindAlarm {
@@ -36,17 +37,24 @@ public class RemindAlarm {
     }
 
     public void scheduleReminder(Medication medication) {
-
-        Intent intent = new Intent(Application.getAppContext(), ReminderReceiver.class);
+        Intent intent = new Intent(Application.getAppContext(), DayRemindReceiver.class);
         intent.putExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, medication.getId());
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(Application.getAppContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT); // TODO: We might need to change flag
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Application.getAppContext(), (int)medication.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT); // TODO: We might need to change flag
 
         AlarmManager alarmManager = (AlarmManager)Application.getAppContext().getSystemService(Context.ALARM_SERVICE);
 
 
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, medication.getStart().getTimeInMillis(),medication.getIntervalInMilliseconds(), pendingIntent);
-
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, medication.getStart().getTimeInMillis(), TimeUnit.DAYS.toMillis(medication.getTakeDayInterval()), pendingIntent);
     }
+
+    public void cancelReminder(long id, Class<?> cls) {
+        AlarmManager alarmManager = (AlarmManager)Application.getAppContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(Application.getAppContext(), cls);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Application.getAppContext(),(int)id,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.cancel(pendingIntent);
+    }
+
 }

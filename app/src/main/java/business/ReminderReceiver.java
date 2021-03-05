@@ -22,6 +22,14 @@ public class ReminderReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent service = new Intent(Application.getAppContext(), NotificationService.class);
+        long id = intent.getLongExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, 0);
+        Medication med = MedicationStorage.getInstance().get(id);
+        if(MedicationStorage.getInstance().countLog(med, med.getStart(), med.getEnd()) >= med.getTakeInterval()) {
+            RemindAlarm.getInstance().cancelReminder(id, ReminderReceiver.class);
+            return;
+        }
+
+        service.putExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, id);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(service);
         }else {

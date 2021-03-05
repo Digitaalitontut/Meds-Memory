@@ -17,6 +17,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import business.Medication;
+import business.MedicationStorage;
+
 public class AddMedication extends AppCompatActivity {
 
     private TextView alarm;
@@ -31,6 +34,21 @@ public class AddMedication extends AppCompatActivity {
         until = findViewById(R.id.editTextDate);
         TextView title = findViewById(R.id.toolbar_title);
         title.setText(R.string.text_add);
+
+        Intent intent = getIntent();
+        long id = intent.getLongExtra(EditMedication.EXTRA_MEDICATION_ID, -1);
+        if(id > -1) {
+            Medication med = MedicationStorage.getInstance().get(id);
+            EditText name = findViewById(R.id.editTextMedication);
+            name.setText(med.getName());
+        }
+    }
+
+    public void addMedication(View view) {
+        Medication med = new Medication();
+        med.setName(((EditText)findViewById(R.id.editTextMedication)).getText().toString());
+        med.setDose(Float.valueOf(((EditText)findViewById(R.id.editTextMedication)).getText().toString()));
+
     }
 
     // Creates a time picker when clock icon is clicked. Picked time then will be sent to TextView.

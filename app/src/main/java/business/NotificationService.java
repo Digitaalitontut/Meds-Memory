@@ -35,7 +35,7 @@ public class NotificationService extends Service {
         createNotificationChannel();
         Intent scheduledIntent = new Intent(this, Reminder.class);
         scheduledIntent.putExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, id);
-        PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(this,0,scheduledIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(this,(int)id,scheduledIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Medication med = MedicationStorage.getInstance().get(id);
         startForeground((int)id, createNotification(med, fullScreenPendingIntent));
 

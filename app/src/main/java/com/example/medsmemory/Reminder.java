@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.util.Log;
 import android.view.WindowManager;
 import android.view.View;
 
 import java.util.Calendar;
 
 import business.RemindAlarm;
-import business.ReminderPublisher;
 
 public class Reminder extends AppCompatActivity {
 
@@ -47,8 +44,8 @@ public class Reminder extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.MINUTE, 10);
-
-        RemindAlarm.getInstance().scheduleNotification(calendar);
+        // TODO: Tähän pitää keksiä ratkaisu
+       // RemindAlarm.getInstance().scheduleNotification(calendar);
 
         Intent intentService = new Intent(getApplicationContext(), Application.class);
         getApplicationContext().stopService(intentService);

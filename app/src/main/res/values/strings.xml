@@ -19,4 +19,5 @@
     <string name="text_alarm">Click to start alarm at</string>
     <string name="text_set">SETTING REMINDER</string>
     <string name="button_snooze">SNOOZE\n10 mins</string>
+    <string name="edit_button">Edit</string>
 </resources>
