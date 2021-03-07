@@ -32,6 +32,10 @@ public class WeekListAdapter extends RecyclerView.Adapter<WeekListAdapter.ViewHo
         inflater = LayoutInflater.from(context);
     }
 
+    public void setData(ArrayList<WeekDay> data) {
+        this.data = data;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,6 +51,7 @@ public class WeekListAdapter extends RecyclerView.Adapter<WeekListAdapter.ViewHo
         holder.dayText.setText(day.getDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
         holder.dayNumeric.setText(new SimpleDateFormat("dd.MM.yyyy").format(day.getDate().getTime()));
         holder.adapter.setData(day.getMedications());
+        holder.adapter.notifyDataSetChanged();
     }
 
     @Override

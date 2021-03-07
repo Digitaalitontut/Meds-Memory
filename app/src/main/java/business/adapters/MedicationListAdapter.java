@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medsmemory.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import business.Medication;
@@ -26,6 +27,9 @@ public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAd
         inflater = LayoutInflater.from(context);
     }
 
+    public void setData(ArrayList<Medication> data) {
+        this.data = data;
+    }
 
     @NonNull
     @Override

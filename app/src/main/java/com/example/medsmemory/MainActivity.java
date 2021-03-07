@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
         adapter = new WeekListAdapter(this,days);
         recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MainActivity", "onResume");
+        ArrayList<WeekDay> days = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            days.add(createWeekDay(i));
+        }
+        adapter.setData(days);
+        adapter.notifyDataSetChanged();
     }
 
     private WeekDay createWeekDay(int offset) {

@@ -48,6 +48,13 @@ public class EditMedication extends AppCompatActivity implements RecyclerClickLi
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.setData(MedicationStorage.getInstance().getAll());
+        adapter.notifyDataSetChanged();
+    }
+
     /**
      * OnClick event for the ListView elements/edit button????
      * Transfers user to AddMedication activity and autofills it with previously stored information.
