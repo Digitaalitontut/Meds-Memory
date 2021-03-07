@@ -1,4 +1,4 @@
-package business;
+package business.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,10 +14,12 @@ import com.example.medsmemory.R;
 
 import java.util.List;
 
+import business.Medication;
+
 public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAdapter.ViewHolder> {
     private List<Medication> data;
     private LayoutInflater inflater;
-    private ItemClickListener clickListener;
+    private RecyclerClickListener clickListener;
 
     public MedicationListAdapter(Context context, List<Medication> data) {
         this.data = data;
@@ -60,11 +62,8 @@ public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAd
         }
     }
 
-    public void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(RecyclerClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
 }

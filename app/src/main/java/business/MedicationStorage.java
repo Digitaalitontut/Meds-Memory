@@ -5,10 +5,14 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.Nullable;
+
 import com.example.medsmemory.Application;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import business.data.MedicationReaderContract;
 import business.data.MedicationReaderDbHelper;
@@ -109,11 +113,13 @@ public class MedicationStorage {
 
     public ArrayList<Medication> getAll() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection = null;
+        String[] selectionArgs = null;
         Cursor cursor = db.query(
                 MedicationReaderContract.MedicationEntry.TABLE_NAME,
                 null,
-                null,
-                null,
+                selection,
+                selectionArgs,
                 null,
                 null,
                 null
@@ -126,5 +132,37 @@ public class MedicationStorage {
         cursor.close();
 
         return meds;
+    }
+
+    // TODO this is dirty way of doing this. Don't have time to think better solution
+    public ArrayList<Medication> getAll(Calendar day) {
+        ArrayList<Medication> meds = getAll();
+        Calendar start = atDayStart(day);
+        Calendar end = atDayEnd(day);
+        ArrayList<Medication> includedMeds = new ArrayList<>();
+        for(Medication med : meds) {
+            for(int i = 0; true; i++) {
+                long notificationTime = med.getStart().getTimeInMillis() + TimeUnit.DAYS.toMillis(i*med.getTakeDayInterval());
+                if(notificationTime > end.getTimeInMillis() || med.getEnd().getTimeInMillis() < day.getTimeInMillis()) break;
+                if(notificationTime >= start.getTimeInMillis() && notificationTime <= end.getTimeInMillis()) {
+                    includedMeds.add(med);
+                }
+            }
+        }
+        return includedMeds;
+    }
+
+    private Calendar atDayStart(Calendar day) {
+        Calendar clone = (Calendar) day.clone();
+        clone.set(Calendar.HOUR_OF_DAY, 0);
+        clone.set(Calendar.MINUTE, 0);
+        clone.set(Calendar.SECOND, 0);
+        clone.set(Calendar.MILLISECOND, 0);
+        return clone;
+    }
+    private Calendar atDayEnd(Calendar day) {
+        Calendar clone = atDayStart((Calendar) day.clone());
+        clone.add(Calendar.DATE, 1);
+        return clone;
     }
 }

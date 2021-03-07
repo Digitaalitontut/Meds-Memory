@@ -13,10 +13,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import business.Medication;
-import business.MedicationListAdapter;
+import business.adapters.MedicationListAdapter;
 import business.MedicationStorage;
+import business.adapters.RecyclerClickListener;
 
-public class EditMedication extends AppCompatActivity implements  MedicationListAdapter.ItemClickListener {
+public class EditMedication extends AppCompatActivity implements RecyclerClickListener {
 
     public static final String EXTRA_MEDICATION_ID = "EXTRA_MED_ID";
     // ListViewiin kaikki lisätyt lääkkeet? Lääkkeen nimeä klikatessa avautuu...esitäytetty AddMedication?
