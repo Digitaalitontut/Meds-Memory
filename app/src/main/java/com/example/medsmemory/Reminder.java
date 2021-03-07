@@ -15,6 +15,10 @@ public class Reminder extends AppCompatActivity {
 
     // TODO: Noutaa lääkityksen tiedot niille varattuihin tekstikenttiin.
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

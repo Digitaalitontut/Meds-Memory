@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    /**
+     * Correct title text set to the toolbar.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
