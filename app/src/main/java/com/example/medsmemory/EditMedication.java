@@ -20,7 +20,8 @@ import business.adapters.RecyclerClickListener;
 public class EditMedication extends AppCompatActivity implements RecyclerClickListener {
 
     public static final String EXTRA_MEDICATION_ID = "EXTRA_MED_ID";
-    // ListViewiin kaikki lisätyt lääkkeet? Lääkkeen nimeä klikatessa avautuu...esitäytetty AddMedication?
+    // ListViewiin kaikki lisätyt lääkkeet? Lääkkeen nimeä klikatessa avautuu...esitäytetty
+    // AddMedication?
     // Joka tapauksessa vie jonkinlaiseen aktiviteettiin, jossa lääkitystä voi muokata tai poistaa.
 
     MedicationListAdapter adapter;
@@ -37,19 +38,27 @@ public class EditMedication extends AppCompatActivity implements RecyclerClickLi
         data = MedicationStorage.getInstance().getAll();
 
         RecyclerView recyclerView = findViewById(R.id.medicationList);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.HORIZONTAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new MedicationListAdapter(this,data);
+        adapter = new MedicationListAdapter(this, data);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
     }
 
+    /**
+     * OnClick event for the ListView elements/edit button????
+     * Transfers user to AddMedication activity and autofills it with previously stored information.
+     *
+     * @param view
+     * @param position
+     */
     @Override
     public void onItemClick(View view, int position) {
-            Intent intent = new Intent(this, AddMedication.class);
-            intent.putExtra(EXTRA_MEDICATION_ID, data.get(position).getId());
-            startActivity(intent);
+        Intent intent = new Intent(this, AddMedication.class);
+        intent.putExtra(EXTRA_MEDICATION_ID, data.get(position).getId());
+        startActivity(intent);
     }
 }

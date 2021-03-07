@@ -8,6 +8,19 @@
 
     <include layout="@layout/toolbar" />
 
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:onClick="editMedications"
+        android:text="@string/button_edit"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
     <Switch
         android:id="@+id/switchNotification"
         android:layout_width="0dp"
@@ -17,6 +30,7 @@
         android:layout_marginEnd="32dp"
         android:checked="true"
         android:text="@string/switch_notifications"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonEdit" />
@@ -29,6 +43,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:text="@string/switch_theme"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,26 +57,77 @@
         app:layout_constraintGuide_percent="0.15" />
 
     <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:onClick="editMedications"
-        android:text="@string/button_edit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
-
-    <Button
         android:id="@+id/applySettingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="30dp"
         android:onClick="applySettings"
         android:text="@string/apply_button"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchTheme" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDayEnd" />
+
+    <EditText
+        android:id="@+id/editTextDayStart"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/edit_start"
+        android:inputType="textPersonName|time"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <EditText
+        android:id="@+id/editTextDayEnd"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/edit_end"
+        android:inputType="time"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDayStart" />
+
+    <Button
+        android:id="@+id/buttonDayStart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_baseline_access_alarm_24"
+        android:onClick="setTime"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextDayStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/editTextDayStart" />
+
+    <Button
+        android:id="@+id/buttonDayEnd"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_baseline_access_alarm_24"
+        android:onClick="setTime"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextDayEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/editTextDayEnd" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.40" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

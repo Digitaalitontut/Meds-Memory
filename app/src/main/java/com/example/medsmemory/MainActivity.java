@@ -20,6 +20,11 @@ import business.adapters.WeekListAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Correct title text set to the toolbar.
+     *
+     * @param savedInstanceState
+     */
     WeekListAdapter adapter;
 
     @Override
@@ -51,11 +56,23 @@ public class MainActivity extends AppCompatActivity {
         return new WeekDay(calendar, MedicationStorage.getInstance().getAll(calendar));
     }
 
+    /**
+     * OnClick event for PLUS button.
+     * Transfers user to the next activity; AddMedication
+     *
+     * @param view
+     */
     public void toAddMedication(View view) {
         Intent intent = new Intent(this, AddMedication.class);
         startActivity(intent);
     }
 
+    /**
+     * OnClick event for "..." button.
+     * Transfers user to the next activity; Settings
+     *
+     * @param view
+     */
     public void toSettings(View view) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);

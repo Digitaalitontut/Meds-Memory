@@ -5,7 +5,7 @@
     <string name="button_menu">•••</string>
     <string name="text_add">ADD MEDICATION</string>
     <string name="edit_medication">Name of medication</string>
-    <string name="edit_dose">Required dose</string>
+    <string name="edit_dose">How many pills?</string>
     <string name="edit_notes">Personal notes e.g. \"Do not take with milk.\"</string>
     <string name="button_submit">SUBMIT</string>
     <string name="text_remind">Remember to take</string>
@@ -16,8 +16,11 @@
     <string name="text_appname">MEDS MEMORY</string>
     <string name="apply_button">Apply</string>
     <string name="button_edit">EDIT MEDICATIONS</string>
-    <string name="text_alarm">Click to start alarm at</string>
+    <string name="text_frequency">How many times a day?</string>
     <string name="text_set">SETTING REMINDER</string>
-    <string name="button_snooze">SNOOZE\n10 mins</string>
+    <string name="starts">Starts on</string>
+    <string name="ends">Ends on</string>
     <string name="edit_button">Edit</string>
+    <string name="edit_start">Start of your day (approx.)</string>
+    <string name="edit_end">End of your day (approx.)</string>
 </resources>
