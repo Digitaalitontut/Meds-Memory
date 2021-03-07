@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -22,10 +21,14 @@ public class Settings extends AppCompatActivity {
         TextView title = findViewById(R.id.toolbar_title);
         title.setText(R.string.text_settings);
 
-        ((Switch)findViewById(R.id.switchTheme)).setChecked(AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DARK_MODE, false));
+        ((Switch) findViewById(R.id.switchTheme)).setChecked(AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DARK_MODE, false));
 
     }
 
+    /**
+     *
+     * @param view
+     */
     public void applySettings(View view) {
         Switch darkMode = findViewById(R.id.switchTheme);
 
@@ -33,7 +36,13 @@ public class Settings extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(darkMode.isChecked() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
-    public void editMedications(View view){
+    /**
+     * OnClick event for "Edit medications" button.
+     * Transfers user to next activity; EditMedications
+     *
+     * @param view
+     */
+    public void editMedications(View view) {
         Intent intent = new Intent(this, EditMedication.class);
         startActivity(intent);
     }

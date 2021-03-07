@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="How many times a day? "
+        android:text="@string/text_frequency"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDose" />
@@ -71,10 +71,21 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Starts on"
+        android:hint="@string/starts"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFrequency" />
+
+    <Button
+        android:id="@+id/buttonStart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/ic_baseline_today_24"
+        android:onClick="setDate"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextStart"
+        app:layout_constraintStart_toEndOf="@+id/editTextStart" />
 
     <EditText
         android:id="@+id/editTextEnd"
@@ -83,10 +94,21 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Ends on"
+        android:hint="@string/ends"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextStart" />
+
+    <Button
+        android:id="@+id/buttonEnd"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/ic_baseline_today_24"
+        android:onClick="setDate"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextEnd"
+        app:layout_constraintStart_toEndOf="@+id/editTextEnd" />
 
     <TextView
         android:id="@+id/textViewRecurring"
@@ -98,6 +120,18 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEnd" />
+
+    <EditText
+        android:id="@+id/editTextDays"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewRecurring"
+        app:layout_constraintEnd_toStartOf="@+id/textViewRecurring2"
+        app:layout_constraintStart_toEndOf="@+id/textViewRecurring" />
 
     <TextView
         android:id="@+id/textViewRecurring2"
@@ -133,45 +167,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:onClick="addMedication"
         android:text="@string/button_submit"
         android:textSize="50sp"
-        android:onClick="addMedication"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonStart"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/ic_baseline_today_24"
-        android:onClick="setDate"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTextStart"
-        app:layout_constraintStart_toEndOf="@+id/editTextStart" />
-
-    <Button
-        android:id="@+id/buttonEnd"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/ic_baseline_today_24"
-        android:onClick="setDate"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTextEnd"
-        app:layout_constraintStart_toEndOf="@+id/editTextEnd" />
-
-    <EditText
-        android:id="@+id/editTextDays"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewRecurring"
-        app:layout_constraintEnd_toStartOf="@+id/textViewRecurring2"
-        app:layout_constraintStart_toEndOf="@+id/textViewRecurring" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

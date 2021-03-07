@@ -19,11 +19,23 @@ public class MainActivity extends AppCompatActivity {
         title.setText(R.string.text_appname);
     }
 
+    /**
+     * OnClick event for PLUS button.
+     * Transfers user to the next activity; AddMedication
+     *
+     * @param view
+     */
     public void toAddMedication(View view) {
         Intent intent = new Intent(this, AddMedication.class);
         startActivity(intent);
     }
 
+    /**
+     * OnClick event for "..." button.
+     * Transfers user to the next activity; Settings
+     *
+     * @param view
+     */
     public void toSettings(View view) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);

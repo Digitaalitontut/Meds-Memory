@@ -3,17 +3,15 @@ package com.example.medsmemory;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.TimeZone;
 
 import business.Medication;
 import business.MedicationStorage;
@@ -35,18 +33,22 @@ public class AddMedication extends AppCompatActivity {
 
         Intent intent = getIntent();
         long id = intent.getLongExtra(EditMedication.EXTRA_MEDICATION_ID, -1);
-        if(id > -1) {
+        if (id > -1) {
             Medication med = MedicationStorage.getInstance().get(id);
             EditText name = findViewById(R.id.editTextMedication);
             name.setText(med.getName());
         }
     }
 
+    /**
+     * OnClick event for Submit button.
+     *
+     * @param view
+     */
     public void addMedication(View view) {
         Medication med = new Medication();
-        med.setName(((EditText)findViewById(R.id.editTextMedication)).getText().toString());
-        med.setDose(Float.valueOf(((EditText)findViewById(R.id.editTextMedication)).getText().toString()));
-
+        med.setName(((EditText) findViewById(R.id.editTextMedication)).getText().toString());
+        med.setDose(Float.valueOf(((EditText) findViewById(R.id.editTextMedication)).getText().toString()));
     }
 
 
