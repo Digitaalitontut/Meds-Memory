@@ -143,7 +143,7 @@ public class MedicationStorage {
         for(Medication med : meds) {
             for(int i = 0; true; i++) {
                 long notificationTime = med.getStart().getTimeInMillis() + TimeUnit.DAYS.toMillis(i*med.getTakeDayInterval());
-                if(notificationTime >= end.getTimeInMillis() || med.getEnd().getTimeInMillis() <= day.getTimeInMillis()) break;
+                if(notificationTime >= end.getTimeInMillis() || med.getEnd().getTimeInMillis() < start.getTimeInMillis()) break;
                 if(notificationTime >= start.getTimeInMillis() && notificationTime <= end.getTimeInMillis()) {
                     includedMeds.add(med);
                 }

@@ -15,7 +15,11 @@ import com.example.medsmemory.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import business.DayRemindReceiver;
 import business.Medication;
+import business.MedicationStorage;
+import business.RemindAlarm;
+import business.ReminderReceiver;
 
 public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAdapter.ViewHolder> {
     private List<Medication> data;
@@ -52,12 +56,27 @@ public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAd
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView text;
         Button button;
+        Button deleteButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text = itemView.findViewById(R.id.med_row_text);
             button = itemView.findViewById(R.id.med_row_edit_button);
+            deleteButton = itemView.findViewById(R.id.med_row_delete_button);
             button.setOnClickListener(this);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Medication med = data.get(getAdapterPosition());
+
+                    RemindAlarm.getInstance().cancelReminder(med.getId(), DayRemindReceiver.class);
+                    RemindAlarm.getInstance().cancelReminder(med.getId(), ReminderReceiver.class);
+
+                    MedicationStorage.getInstance().delete(med);
+                    setData(MedicationStorage.getInstance().getAll());
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         @Override

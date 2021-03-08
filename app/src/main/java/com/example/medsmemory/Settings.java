@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -16,6 +17,8 @@ import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 
 import business.AppSettingsStorage;
@@ -24,6 +27,9 @@ public class Settings extends AppCompatActivity {
 
     private EditText start;
     private EditText end;
+
+    private HashMap<Integer, Calendar> calendarHashMap = new HashMap<>();
+    private SimpleDateFormat format = new SimpleDateFormat("k:mm");
 
     /**
      * Correct title text set to the toolbar.
@@ -44,6 +50,35 @@ public class Settings extends AppCompatActivity {
 
         ((Switch) findViewById(R.id.switchTheme)).setChecked(AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DARK_MODE, false));
 
+        Calendar startCalendar = Calendar.getInstance();
+        long dayStartSetting = AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_START, 0L);
+        if(dayStartSetting > 0) {
+            startCalendar.setTimeInMillis(dayStartSetting);
+        }else {
+            startCalendar.set(Calendar.HOUR, 9);
+            startCalendar.set(Calendar.MINUTE, 0);
+            startCalendar.set(Calendar.SECOND, 0);
+            startCalendar.set(Calendar.MILLISECOND, 0);
+            AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DAY_START, startCalendar.getTimeInMillis());
+        }
+
+        calendarHashMap.put(start.getId(), startCalendar);
+        start.setText(format.format(startCalendar.getTime()));
+
+        Calendar endCalendar = Calendar.getInstance();
+        long dayEndSetting = AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_END, 0L);
+        if(dayEndSetting > 0) {
+            endCalendar.setTimeInMillis(dayEndSetting);
+        }else {
+            endCalendar.set(Calendar.HOUR, 21);
+            endCalendar.set(Calendar.MINUTE, 0);
+            endCalendar.set(Calendar.SECOND, 0);
+            endCalendar.set(Calendar.MILLISECOND, 0);
+            AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DAY_END, endCalendar.getTimeInMillis());
+        }
+
+        calendarHashMap.put(end.getId(), endCalendar);
+        end.setText(format.format(endCalendar.getTime()));
     }
 
     /**
@@ -62,13 +97,17 @@ public class Settings extends AppCompatActivity {
      */
     public void applySettings(View view) {
         Switch darkMode = findViewById(R.id.switchTheme);
+        AppSettingsStorage settings = AppSettingsStorage.getInstance();
 
-        AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DARK_MODE,
+        settings.set(AppSettingsStorage.Setting.DARK_MODE,
                 darkMode.isChecked());
         AppCompatDelegate.setDefaultNightMode(darkMode.isChecked() ?
                 AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-    }
 
+
+        settings.set(AppSettingsStorage.Setting.DAY_START, calendarHashMap.get(R.id.editTextDayStart).getTimeInMillis());
+        settings.set(AppSettingsStorage.Setting.DAY_END, calendarHashMap.get(R.id.editTextDayEnd).getTimeInMillis());
+    }
     /**
      * Creates a time picker when one of the clock icon is clicked.
      * Picked time will be sent to an EditText according to which button is pressed.
@@ -82,8 +121,15 @@ public class Settings extends AppCompatActivity {
         } else {
             text = this.end;
         }
-
         Calendar calendar = Calendar.getInstance();
+        try {
+            Date d = format.parse(text.getText().toString());
+            calendar.setTime(d);
+        }catch (Exception e){
+            Log.e("Parse error: ", "Error parsing date", e);
+        }
+
+
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
@@ -94,7 +140,7 @@ public class Settings extends AppCompatActivity {
                 c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 c.set(Calendar.MINUTE, min);
                 c.setTimeZone(TimeZone.getDefault());
-                SimpleDateFormat format = new SimpleDateFormat("k:mm");
+                calendarHashMap.put(text.getId(), c);
                 String set = format.format(c.getTime());
                 text.setText(set);
             }

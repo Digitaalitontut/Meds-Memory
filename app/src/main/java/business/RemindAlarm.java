@@ -44,9 +44,27 @@ public class RemindAlarm {
 
         AlarmManager alarmManager = (AlarmManager)Application.getAppContext().getSystemService(Context.ALARM_SERVICE);
 
+        Calendar dayStart = Calendar.getInstance();
+        long dayStartMillis = AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_START, 0L);
+        if(dayStartMillis > 0) {
+            dayStart.setTimeInMillis(dayStartMillis);
+        }else {
+            dayStart.set(Calendar.HOUR, 9);
+            dayStart.set(Calendar.MINUTE, 0);
+            dayStart.set(Calendar.SECOND, 0);
+            dayStart.set(Calendar.MILLISECOND, 0);
+        }
 
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, medication.getStart().getTimeInMillis(), TimeUnit.DAYS.toMillis(medication.getTakeDayInterval()), pendingIntent);
+        Calendar start = Calendar.getInstance();
+        start.setTimeInMillis(medication.getStart().getTimeInMillis());
+
+        start.set(Calendar.HOUR, dayStart.get(Calendar.HOUR));
+        start.set(Calendar.MINUTE, dayStart.get(Calendar.MINUTE));
+        start.set(Calendar.SECOND, 0);
+        start.set(Calendar.MILLISECOND, 0);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, start.getTimeInMillis(), TimeUnit.DAYS.toMillis(medication.getTakeDayInterval()), pendingIntent);
     }
 
     public void cancelReminder(long id, Class<?> cls) {

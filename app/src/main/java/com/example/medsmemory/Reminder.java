@@ -6,14 +6,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
+import business.Medication;
+import business.MedicationStorage;
+import business.NotificationService;
 import business.RemindAlarm;
 
 public class Reminder extends AppCompatActivity {
 
-    // TODO: Noutaa lääkityksen tiedot niille varattuihin tekstikenttiin.
+
+
+    Medication medication;
 
     /**
      *
@@ -22,7 +28,9 @@ public class Reminder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Intent intent = getIntent();
+        long id = intent.getLongExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, -1);
+        medication = MedicationStorage.getInstance().get(id);
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
@@ -31,6 +39,13 @@ public class Reminder extends AppCompatActivity {
                         WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_reminder);
+        TextView dose = findViewById(R.id.textViewDose);
+        TextView medicine = findViewById(R.id.textViewMedicine);
+        TextView notes = findViewById(R.id.textViewNotes);
+
+        dose.setText(Float.toString(medication.getDose()));
+        medicine.setText(medication.getName());
+        notes.setText(medication.getNotes());
     }
 
     @Override
@@ -47,9 +62,9 @@ public class Reminder extends AppCompatActivity {
      * @param view
      */
     public void onCheck(View view) {
-        // TODO: Kalenteriin lääkkeen merkintä otetuksi
-        Intent intentService = new Intent(getApplicationContext(), Application.class);
+        Intent intentService = new Intent(getApplicationContext(), NotificationService.class);
         getApplicationContext().stopService(intentService);
+        MedicationStorage.getInstance().insertLog(medication, Calendar.getInstance());
         finish();
     }
 

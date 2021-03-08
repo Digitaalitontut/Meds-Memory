@@ -21,6 +21,7 @@
     <string name="starts">Starts on</string>
     <string name="ends">Ends on</string>
     <string name="edit_button">Edit</string>
+    <string name="delete_button">Delete</string>
     <string name="edit_start">Start of your day (approx.)</string>
     <string name="edit_end">End of your day (approx.)</string>
 </resources>

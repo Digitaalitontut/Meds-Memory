@@ -12,7 +12,9 @@ public class AppSettingsStorage {
 
     public enum Setting {
         DARK_MODE,
-        NOTIFICATIONS_ENABLED
+        NOTIFICATIONS_ENABLED,
+        DAY_START,
+        DAY_END
     }
 
     private SharedPreferences sharedPref = Application.getAppContext().getSharedPreferences("MEDS_MEMORY_SETTINGS", Context.MODE_PRIVATE);
