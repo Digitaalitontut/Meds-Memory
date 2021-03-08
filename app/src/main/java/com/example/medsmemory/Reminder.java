@@ -15,6 +15,9 @@ import business.MedicationStorage;
 import business.NotificationService;
 import business.RemindAlarm;
 
+/**
+ * Screen shown during alarm. Dismiss by checking medicine taken.
+ */
 public class Reminder extends AppCompatActivity {
 
 
@@ -22,7 +25,6 @@ public class Reminder extends AppCompatActivity {
     Medication medication;
 
     /**
-     *
      * @param savedInstanceState
      */
     @Override

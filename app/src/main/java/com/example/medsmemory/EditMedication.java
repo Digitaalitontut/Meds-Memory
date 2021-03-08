@@ -17,9 +17,13 @@ import business.adapters.MedicationListAdapter;
 import business.MedicationStorage;
 import business.adapters.RecyclerClickListener;
 
+/**
+ * ListView of all stored medications. Button to AddMedication to look and edit saved info.
+ */
 public class EditMedication extends AppCompatActivity implements RecyclerClickListener {
 
     public static final String EXTRA_MEDICATION_ID = "EXTRA_MED_ID";
+    public  static final String EXTRA_TITLE = "ADDMEDICATION";
     // ListViewiin kaikki lisätyt lääkkeet? Lääkkeen nimeä klikatessa avautuu...esitäytetty
     // AddMedication?
     // Joka tapauksessa vie jonkinlaiseen aktiviteettiin, jossa lääkitystä voi muokata tai poistaa.
@@ -64,8 +68,10 @@ public class EditMedication extends AppCompatActivity implements RecyclerClickLi
      */
     @Override
     public void onItemClick(View view, int position) {
+        String text = "Yes";
         Intent intent = new Intent(this, AddMedication.class);
         intent.putExtra(EXTRA_MEDICATION_ID, data.get(position).getId());
+        intent.putExtra(EXTRA_TITLE, text);
         startActivity(intent);
     }
 }
