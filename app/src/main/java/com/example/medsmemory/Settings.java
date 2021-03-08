@@ -20,6 +20,9 @@ import java.util.TimeZone;
 
 import business.AppSettingsStorage;
 
+/**
+ * Set notifications and dark mode ON/OFF. Set personal day cycle. Go to list of your medications.
+ */
 public class Settings extends AppCompatActivity {
 
     private EditText start;

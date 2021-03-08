@@ -11,12 +11,14 @@ import java.util.Calendar;
 
 import business.RemindAlarm;
 
+/**
+ * Screen shown during alarm. Dismiss by checking medicine taken.
+ */
 public class Reminder extends AppCompatActivity {
 
     // TODO: Noutaa lääkityksen tiedot niille varattuihin tekstikenttiin.
 
     /**
-     *
      * @param savedInstanceState
      */
     @Override

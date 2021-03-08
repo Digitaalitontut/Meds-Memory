@@ -17,6 +17,9 @@ import business.adapters.MedicationListAdapter;
 import business.MedicationStorage;
 import business.adapters.RecyclerClickListener;
 
+/**
+ * ListView of all stored medications. Button to AddMedication to look and edit saved info.
+ */
 public class EditMedication extends AppCompatActivity implements RecyclerClickListener {
 
     public static final String EXTRA_MEDICATION_ID = "EXTRA_MED_ID";

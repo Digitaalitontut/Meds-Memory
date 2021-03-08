@@ -18,16 +18,18 @@ import business.MedicationStorage;
 import business.WeekDay;
 import business.adapters.WeekListAdapter;
 
-
+/**
+ * View of calendar. Buttons to AddMedication and Settings.
+ */
 public class MainActivity extends AppCompatActivity {
+
+    WeekListAdapter adapter;
 
     /**
      * Correct title text set to the toolbar.
      *
      * @param savedInstanceState
      */
-    WeekListAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         title.setText(R.string.text_appname);
 
         RecyclerView recyclerView = findViewById(R.id.weekView);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.HORIZONTAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<WeekDay> days = new ArrayList<>();
@@ -45,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
             days.add(createWeekDay(i));
         }
 
-        adapter = new WeekListAdapter(this,days);
+        adapter = new WeekListAdapter(this, days);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override

@@ -21,8 +21,12 @@ import business.MedicationStorage;
 import business.RemindAlarm;
 import business.ReminderReceiver;
 
+/**
+ * Add or edit medications.
+ */
 public class AddMedication extends AppCompatActivity {
 
+    private TextView title;
     private EditText name;
     private EditText dose;
     private EditText from;
@@ -35,6 +39,11 @@ public class AddMedication extends AppCompatActivity {
 
     private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
+    /**
+     * Toolbar title is set to "ADD MEDICATION".
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +59,23 @@ public class AddMedication extends AppCompatActivity {
         takeInterval = findViewById(R.id.editTextNumber);
         notes = findViewById(R.id.editMultiLineNotes);
 
-        TextView title = findViewById(R.id.toolbar_title);
+        title = findViewById(R.id.toolbar_title);
         title.setText(R.string.text_add);
 
+        fill();
+
+    }
+
+    /**
+     * If activity launches from EditMedication, title is set to "EDIT MEDICATION".
+     * Fields are filled with medication information according to which medication was clicked to
+     * be edited. Information is retrieved from database.
+     */
+    public void fill() {
         Intent intent = getIntent();
         String text = intent.getStringExtra(EditMedication.EXTRA_TITLE);
-        if (text != null){
+
+        if (text != null) {
             title.setText(R.string.button_edit);
         }
 
@@ -82,6 +102,7 @@ public class AddMedication extends AppCompatActivity {
 
     /**
      * OnClick event for Submit button.
+     * Stores values to database and sets reminder.
      *
      * @param view
      */
@@ -146,7 +167,3 @@ public class AddMedication extends AppCompatActivity {
         datePickerDialog.show();
     }
 }
-
-// Napit löytyy themet:
-// Theme_MaterialComponents_Dialog (tumma, valkea ja turkoosi)
-// ThemeOverlay_AppCompat_Dialog (turkoosi, valkea, harmaa, violetti - so far mukavin silmille)
