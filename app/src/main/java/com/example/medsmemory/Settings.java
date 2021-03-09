@@ -57,7 +57,7 @@ public class Settings extends AppCompatActivity {
         long dayStartSetting = AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_START, 0L);
         if(dayStartSetting > 0) {
             startCalendar.setTimeInMillis(dayStartSetting);
-        }else {
+        } else {
             startCalendar.set(Calendar.HOUR, 9);
             startCalendar.set(Calendar.MINUTE, 0);
             startCalendar.set(Calendar.SECOND, 0);
@@ -96,6 +96,10 @@ public class Settings extends AppCompatActivity {
     }
 
     /**
+     * OnClick event for dark mode Switch and Apply button.
+     * Changes theme according to the position of the switch.
+     * Tallentaa asetetun päivärytmin.
+     *
      * Applies settings to the AppSettingsStorage
      * @param view
      */

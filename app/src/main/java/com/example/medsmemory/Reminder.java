@@ -21,7 +21,6 @@ import business.RemindAlarm;
 public class Reminder extends AppCompatActivity {
 
 
-
     Medication medication;
 
     /**
@@ -46,7 +45,7 @@ public class Reminder extends AppCompatActivity {
         TextView medicine = findViewById(R.id.textViewMedicine);
         TextView notes = findViewById(R.id.textViewNotes);
 
-        dose.setText(Float.toString(medication.getDose()));
+        dose.setText(Float.toString(medication.getDose()) + " pills of");
         medicine.setText(medication.getName());
         notes.setText(medication.getNotes());
     }
@@ -70,23 +69,4 @@ public class Reminder extends AppCompatActivity {
         MedicationStorage.getInstance().insertLog(medication, Calendar.getInstance());
         finish();
     }
-
-    /*
-     * OnClick event for snooze button.
-     * Creates new notification scheduled to 10 minutes away from now.
-     * Closes current activity.
-     *
-     * @param view
-
-    public void snooze(View view) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.MINUTE, 10);
-        // TODO: Tähän pitää keksiä ratkaisu
-       // RemindAlarm.getInstance().scheduleNotification(calendar);
-
-        Intent intentService = new Intent(getApplicationContext(), Application.class);
-        getApplicationContext().stopService(intentService);
-        finish();
-    }*/
 }
