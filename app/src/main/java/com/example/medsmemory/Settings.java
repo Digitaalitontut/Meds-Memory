@@ -54,30 +54,34 @@ public class Settings extends AppCompatActivity {
         ((Switch) findViewById(R.id.switchTheme)).setChecked(AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DARK_MODE, false));
 
         Calendar startCalendar = Calendar.getInstance();
-        long dayStartSetting = AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_START, 0L);
-        if(dayStartSetting > 0) {
+        long dayStartSetting =
+                AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_START, 0L);
+        if (dayStartSetting > 0) {
             startCalendar.setTimeInMillis(dayStartSetting);
-        }else {
+        } else {
             startCalendar.set(Calendar.HOUR, 9);
             startCalendar.set(Calendar.MINUTE, 0);
             startCalendar.set(Calendar.SECOND, 0);
             startCalendar.set(Calendar.MILLISECOND, 0);
-            AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DAY_START, startCalendar.getTimeInMillis());
+            AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DAY_START,
+                    startCalendar.getTimeInMillis());
         }
 
         calendarHashMap.put(start.getId(), startCalendar);
         start.setText(format.format(startCalendar.getTime()));
 
         Calendar endCalendar = Calendar.getInstance();
-        long dayEndSetting = AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_END, 0L);
-        if(dayEndSetting > 0) {
+        long dayEndSetting =
+                AppSettingsStorage.getInstance().get(AppSettingsStorage.Setting.DAY_END, 0L);
+        if (dayEndSetting > 0) {
             endCalendar.setTimeInMillis(dayEndSetting);
-        }else {
+        } else {
             endCalendar.set(Calendar.HOUR, 21);
             endCalendar.set(Calendar.MINUTE, 0);
             endCalendar.set(Calendar.SECOND, 0);
             endCalendar.set(Calendar.MILLISECOND, 0);
-            AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DAY_END, endCalendar.getTimeInMillis());
+            AppSettingsStorage.getInstance().set(AppSettingsStorage.Setting.DAY_END,
+                    endCalendar.getTimeInMillis());
         }
 
         calendarHashMap.put(end.getId(), endCalendar);
@@ -96,6 +100,10 @@ public class Settings extends AppCompatActivity {
     }
 
     /**
+     * OnClick event for dark mode Switch and Apply button.
+     * Changes theme according to the position of the switch.
+     * Tallentaa asetetun päivärytmin.
+     *
      * @param view
      */
     public void applySettings(View view) {
@@ -107,10 +115,12 @@ public class Settings extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(darkMode.isChecked() ?
                 AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
-
-        settings.set(AppSettingsStorage.Setting.DAY_START, calendarHashMap.get(R.id.editTextDayStart).getTimeInMillis());
-        settings.set(AppSettingsStorage.Setting.DAY_END, calendarHashMap.get(R.id.editTextDayEnd).getTimeInMillis());
+        settings.set(AppSettingsStorage.Setting.DAY_START,
+                calendarHashMap.get(R.id.editTextDayStart).getTimeInMillis());
+        settings.set(AppSettingsStorage.Setting.DAY_END,
+                calendarHashMap.get(R.id.editTextDayEnd).getTimeInMillis());
     }
+
     /**
      * Creates a time picker when one of the clock icon is clicked.
      * Picked time will be sent to an EditText according to which button is pressed.
@@ -128,10 +138,9 @@ public class Settings extends AppCompatActivity {
         try {
             Date d = format.parse(text.getText().toString());
             calendar.setTime(d);
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e("Parse error: ", "Error parsing date", e);
         }
-
 
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);

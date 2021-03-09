@@ -18,15 +18,12 @@ import business.MedicationStorage;
 import business.adapters.RecyclerClickListener;
 
 /**
- * ListView of all stored medications. Button to AddMedication to look and edit saved info.
+ * ListView of all stored medications. Buttons to AddMedication to look and edit saved info and to delete meds.
  */
 public class EditMedication extends AppCompatActivity implements RecyclerClickListener {
 
     public static final String EXTRA_MEDICATION_ID = "EXTRA_MED_ID";
-    public  static final String EXTRA_TITLE = "ADDMEDICATION";
-    // ListViewiin kaikki lisätyt lääkkeet? Lääkkeen nimeä klikatessa avautuu...esitäytetty
-    // AddMedication?
-    // Joka tapauksessa vie jonkinlaiseen aktiviteettiin, jossa lääkitystä voi muokata tai poistaa.
+    public static final String EXTRA_TITLE = "ADDMEDICATION";
 
     MedicationListAdapter adapter;
 
@@ -60,7 +57,7 @@ public class EditMedication extends AppCompatActivity implements RecyclerClickLi
     }
 
     /**
-     * OnClick event for the ListView elements/edit button????
+     * OnClick event for the ListView edit button.
      * Transfers user to AddMedication activity and autofills it with previously stored information.
      *
      * @param view
