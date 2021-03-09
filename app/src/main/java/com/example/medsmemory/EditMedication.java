@@ -32,6 +32,10 @@ public class EditMedication extends AppCompatActivity implements RecyclerClickLi
 
     List<Medication> data = null;
 
+    /**
+     * Creates adapter for Medication list and sets data
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,9 @@ public class EditMedication extends AppCompatActivity implements RecyclerClickLi
 
     }
 
+    /**
+     * Refreshes Medicationlist adapter in case it that bee changed
+     */
     @Override
     protected void onResume() {
         super.onResume();

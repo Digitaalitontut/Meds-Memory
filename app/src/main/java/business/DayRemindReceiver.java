@@ -13,7 +13,15 @@ import com.example.medsmemory.Application;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * BroadcastReceiver for Daily alarm
+ */
 public class DayRemindReceiver extends BroadcastReceiver {
+    /**
+     * Creates new alarms if medication needs to be taken multiple times during the day else this creates notification to remind user to take medication
+     * @param context Application context
+     * @param intent Intent that should contains RemindAlarm.EXTRA_NOTIFICATION_KEY that has id of the medication
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         long id = intent.getLongExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, 0);
@@ -31,6 +39,11 @@ public class DayRemindReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * Starts NotificationService which then creates notification
+     * @param context Application context
+     * @param med medication for the notifcation
+     */
     private void createNotification(Context context, Medication med) {
         Intent service = new Intent(Application.getAppContext(), NotificationService.class);
         service.putExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, med.getId());
@@ -41,7 +54,10 @@ public class DayRemindReceiver extends BroadcastReceiver {
         }
     }
 
-
+    /**
+     * Creates new Alarms for the day
+     * @param med Medication for the alarms
+     */
     private void createDayAlarms(Medication med) {
         AlarmManager alarmManager = (AlarmManager) Application.getAppContext().getSystemService(Context.ALARM_SERVICE);
 

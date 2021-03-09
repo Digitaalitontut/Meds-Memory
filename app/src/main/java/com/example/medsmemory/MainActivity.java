@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Refreshes calendar in case it has been changed
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -64,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Creates Week day objects
+     * @param offset how many days forward
+     * @return returns created weekday
+     */
     private WeekDay createWeekDay(int offset) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

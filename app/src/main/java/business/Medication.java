@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 
 import java.util.Calendar;
 
+/**
+ * Model for medication
+ */
 public class Medication {
 
     private long id;

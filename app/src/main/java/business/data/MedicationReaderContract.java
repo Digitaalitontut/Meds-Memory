@@ -4,9 +4,15 @@ import android.provider.BaseColumns;
 
 import business.Medication;
 
+/**
+ * Database contract for Medications
+ */
 public final class MedicationReaderContract {
     private MedicationReaderContract() {}
 
+    /**
+     * SQL statement to create medication entry table
+     */
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + MedicationEntry.TABLE_NAME + " (" +
             MedicationEntry.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             MedicationEntry.COLUMN_NAME_NAME+" TEXT," +
@@ -18,14 +24,25 @@ public final class MedicationReaderContract {
             MedicationEntry.COLUMN_NAME_NOTES+" TEXT" +
                     ")";
 
+    /**
+     * SQL statement to create medication logs
+     */
     public static final String SQL_CREATE_MED_LOG = "CREATE TABLE " + MedicationLog.TABLE_NAME + " ("+
             MedicationLog.COLUMN_NAME_MED_ID + " INTEGER," +
             MedicationLog.COLUMN_NAME_TAKEN_AT + " INTEGER)";
 
-
+    /**
+     * SQL statement to delete entry table
+     */
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + MedicationEntry.TABLE_NAME;
+    /**
+     * SQL statement to delete medication log
+     */
     public static final String SQL_DELETE_MED_LOG = "DROP TABLE IF EXISTS " + MedicationLog.TABLE_NAME;
 
+    /**
+     * Defines table name and column names for entry table
+     */
     public static class MedicationEntry implements BaseColumns {
         public static final String TABLE_NAME = "entry";
         public static final String COLUMN_NAME_ID = "id";
@@ -38,6 +55,9 @@ public final class MedicationReaderContract {
         public static final String COLUMN_NAME_NOTES = "notes";
     }
 
+    /**
+     * Defines table name and column names for medication logs
+     */
     public static class MedicationLog implements  BaseColumns {
         public static final String TABLE_NAME = "medLog";
         public static final String COLUMN_NAME_MED_ID = "medID";

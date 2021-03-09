@@ -21,20 +21,38 @@ import business.MedicationStorage;
 import business.RemindAlarm;
 import business.ReminderReceiver;
 
+/**
+ * Adapter that handles showing medications in EditMedication activity
+ */
 public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAdapter.ViewHolder> {
     private List<Medication> data;
     private LayoutInflater inflater;
     private RecyclerClickListener clickListener;
 
+    /**
+     * Constructor for MedicationListAdapter
+     * @param context Application context
+     * @param data Data to be used in listing
+     */
     public MedicationListAdapter(Context context, List<Medication> data) {
         this.data = data;
         inflater = LayoutInflater.from(context);
     }
 
+    /**
+     * Sets data to be used. Doesn't refresh adapter.
+     * @param data Adapter data
+     */
     public void setData(ArrayList<Medication> data) {
         this.data = data;
     }
 
+    /**
+     * Creates ViewHolder
+     * @param parent parent
+     * @param viewType viewType
+     * @return returns created ViewHolder
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,22 +60,38 @@ public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAd
         return new ViewHolder(view);
     }
 
+    /**
+     * Sets data to the view
+     * @param holder ViewHolder
+     * @param position position where to read data
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Medication med = data.get(position);
         holder.text.setText(med.getName());
     }
 
+    /**
+     * Gets size of the data
+     * @return returns size of the data
+     */
     @Override
     public int getItemCount() {
         return data.size();
     }
 
+    /**
+     * ViewHolder for MedicationListAdapter
+     */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView text;
         Button button;
         Button deleteButton;
 
+        /**
+         * Constructor for ViewHolder
+         * @param itemView List item view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text = itemView.findViewById(R.id.med_row_text);
@@ -79,12 +113,20 @@ public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAd
             });
         }
 
+        /**
+         * Handles Edit button click
+         * @param v Button that was clicked
+         */
         @Override
         public void onClick(View v) {
             if(clickListener != null)clickListener.onItemClick(v,getAdapterPosition());
         }
     }
 
+    /**
+     * Sets click listener for edit button
+     * @param itemClickListener Class that implements RecyclerClickListener
+     */
     public void setClickListener(RecyclerClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }

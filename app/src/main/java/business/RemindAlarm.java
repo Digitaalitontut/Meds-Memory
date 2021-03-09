@@ -22,6 +22,9 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * Singleton that handles creating alarms
+ */
 public class RemindAlarm {
     private final String CHANNEL_ID = "MEDSMEMORYCHANNEL";
     public static final String EXTRA_NOTIFICATION_KEY = "EXTRA_NOTIFICATION_KEY";
@@ -31,11 +34,19 @@ public class RemindAlarm {
     private RemindAlarm() {
     }
 
+    /**
+     * Gets RemindAlarm singleton
+     * @return returns instance of RemindAlarm
+     */
     public static RemindAlarm getInstance() {
         if(_instance == null){_instance = new RemindAlarm();}
         return _instance;
     }
 
+    /**
+     * Schedules alarms for medication
+     * @param medication Medication
+     */
     public void scheduleReminder(Medication medication) {
         Intent intent = new Intent(Application.getAppContext(), DayRemindReceiver.class);
         intent.putExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, medication.getId());
@@ -67,6 +78,11 @@ public class RemindAlarm {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, start.getTimeInMillis(), TimeUnit.DAYS.toMillis(medication.getTakeDayInterval()), pendingIntent);
     }
 
+    /**
+     * Cancels alarms for medication
+     * @param id id of the medication
+     * @param cls alarm receiver (DayRemindReceiver or ReminderReceiver)
+     */
     public void cancelReminder(long id, Class<?> cls) {
         AlarmManager alarmManager = (AlarmManager)Application.getAppContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(Application.getAppContext(), cls);

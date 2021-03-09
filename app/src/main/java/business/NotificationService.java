@@ -19,6 +19,9 @@ import com.example.medsmemory.Application;
 import com.example.medsmemory.R;
 import com.example.medsmemory.Reminder;
 
+/**
+ * Service that will create and show notifications
+ */
 public class NotificationService extends Service {
     private final String CHANNEL_ID = "MEDS_MEMORY_CHANNEL";
 
@@ -29,6 +32,13 @@ public class NotificationService extends Service {
 
     }
 
+    /**
+     * Creates notification and starts foreground service
+     * @param intent intent that should contain RemindAlarm.EXTRA_NOTIFICATION_KEY
+     * @param flags flags
+     * @param startId start id
+     * @return
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         long id = intent.getLongExtra(RemindAlarm.EXTRA_NOTIFICATION_KEY, 0);
@@ -42,6 +52,12 @@ public class NotificationService extends Service {
         return START_STICKY; // TODO What is this?
     }
 
+    /**
+     * Creates notification
+     * @param med Medication for the notification
+     * @param intent pending intent that should be the reminder
+     * @return returns created notification
+     */
     private Notification createNotification(Medication med, PendingIntent intent) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(Application.getAppContext(),CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_report)
@@ -57,6 +73,9 @@ public class NotificationService extends Service {
         return builder.build();
     }
 
+    /**
+     * Creates notification channel for the notifications
+     */
     private void createNotificationChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Meds Memory", NotificationManager.IMPORTANCE_HIGH);

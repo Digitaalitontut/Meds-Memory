@@ -16,9 +16,17 @@ import com.example.medsmemory.Application;
 import com.example.medsmemory.R;
 import com.example.medsmemory.Reminder;
 
+/**
+ * BroadcastReceiver that creates notifications when alarms go off
+ */
 public class ReminderReceiver extends BroadcastReceiver {
 
 
+    /**
+     * Creates service that will show the alarm
+     * @param context Application context
+     * @param intent intent that should contain RemindAlarm.EXTRA_NOTIFICATION_KEY
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent service = new Intent(Application.getAppContext(), NotificationService.class);

@@ -96,6 +96,7 @@ public class Settings extends AppCompatActivity {
     }
 
     /**
+     * Applies settings to the AppSettingsStorage
      * @param view
      */
     public void applySettings(View view) {

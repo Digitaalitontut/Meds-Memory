@@ -25,6 +25,7 @@ public class Reminder extends AppCompatActivity {
     Medication medication;
 
     /**
+     * Loads medication from the database and sets data to the view
      * @param savedInstanceState
      */
     @Override
